@@ -35,11 +35,20 @@ impl Default for App {
     fn default() -> Self {
         // Mock data - in real app, this would come from Git
         let files = vec![
-            FileItem { name: "untracked.rs".to_string(), selected: false },
-            FileItem { name: "modified.rs".to_string(), selected: false },
-            FileItem { name: "staged.rs".to_string(), selected: false },
+            FileItem {
+                name: "untracked.rs".to_string(),
+                selected: false,
+            },
+            FileItem {
+                name: "modified.rs".to_string(),
+                selected: false,
+            },
+            FileItem {
+                name: "staged.rs".to_string(),
+                selected: false,
+            },
         ];
-        
+
         App {
             files,
             files_state: ListState::default(),
@@ -219,12 +228,12 @@ fn ui(f: &mut Frame, app: &mut App) {
     let pr_block = Block::default()
         .title("PR Title (press 'p' to edit)")
         .borders(Borders::ALL);
-    let pr_text = Paragraph::new(app.pr_title.as_str())
-        .block(pr_block)
-        .style(match app.input_mode {
-            InputMode::PRTitle => Style::default().fg(Color::Yellow),
-            _ => Style::default(),
-        });
+    let pr_text =
+        Paragraph::new(app.pr_title.as_str())
+            .block(pr_block)
+            .style(match app.input_mode {
+                InputMode::PRTitle => Style::default().fg(Color::Yellow),
+                _ => Style::default(),
+            });
     f.render_widget(pr_text, chunks[2]);
 }
-
